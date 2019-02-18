@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "to check wether the building is under major rennovations"
+when
+UnderMajorRenovation(underRennovation=="yes")
+then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+        key.add("Display: The house is under major rennovation");
+end
+
+rule " check wether the building is under major rennovations"
+when
+UnderMajorRenovation(underRennovation!="yes")
+then
+        value.clear();
+        key.clear();
+        key.add("Display: The house is not under major rennovation");
+end

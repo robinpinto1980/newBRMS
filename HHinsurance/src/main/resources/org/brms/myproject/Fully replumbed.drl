@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "To check whether fully replumbed"
+when
+FullyReplumb(fullyReplumb=="yes")
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display:The building was fully replumbed");
+end
+
+rule "To check if not fully replumbed"
+when
+FullyReplumb(fullyReplumb!="yes")
+then
+value.clear();
+key.clear();
+key.add("Display:The building was not fully replumbed");
+end

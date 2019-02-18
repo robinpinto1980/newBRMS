@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Do you know the plumbing system?"
+when
+Plumbing(knowSystem=="yes")
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display:The owner knows about the plumbing system");
+end
+
+rule "If do not know about the plumbing system?"
+when
+Plumbing(knowSystem!="yes")
+then
+value.clear();
+key.clear();
+key.add("Display:The owner doesn't know about the plumbing system");
+end

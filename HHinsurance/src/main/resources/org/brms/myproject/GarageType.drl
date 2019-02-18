@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check if the garage is detached from main building and has a living space"
+when
+Garage(garageType=="detachedHasLivingSpace")
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display: The garage is detached from main building and has a living space");
+end
+
+rule "Check if the garage is not detached from main building and has no living space"
+when
+Garage(garageType!="detachedHasLivingSpace")
+then
+value.clear();
+key.clear();
+key.add("Display:The garage is not detached from main building and has no living space");
+end

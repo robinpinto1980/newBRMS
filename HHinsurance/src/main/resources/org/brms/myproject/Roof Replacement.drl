@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check whether the roof was replaced"
+when
+RoofReplacement(roofReplacement=="yes")
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display: The roof was replaced");
+end
+
+rule "Check if no replacement of roof"
+when
+RoofReplacement(roofReplacement!="yes")
+then
+value.clear();
+key.clear();
+key.add("Display: The roof was not replaced");
+end

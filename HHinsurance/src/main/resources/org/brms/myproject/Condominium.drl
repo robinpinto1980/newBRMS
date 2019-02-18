@@ -1,0 +1,17 @@
+package org.brms.myproject;
+
+rule "check wether the house type is condominium"
+    when
+        StructureType((houseType == "Condominium")&&(houseType!="Residential")&&(houseType!="Row"))
+    then
+        System.out.println("The structure type is Condominium");
+        drools.setFocus("Stories");
+end
+
+rule "Check number of stories 6 or above"
+    ruleflow-group "Stories"
+    when
+        StructureType(stories>5)
+    then
+        System.out.println("Have more than 5 stories so the Construction is superior");
+end

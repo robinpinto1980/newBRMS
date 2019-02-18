@@ -1,0 +1,31 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check whether roof shape is flat"
+when
+RoofShape(roofShape=="Flat")
+then
+value.clear();
+key.clear();
+key.add("Display: Roof shape is flat");
+end
+
+rule "Check whether roof shape is gable"
+when
+RoofShape(roofShape=="Gable")
+then
+value.clear();
+key.clear();
+key.add("Display: Roof shape is gable");
+end
+
+rule "Check whether roof shape is hip"
+when
+RoofShape(roofShape=="Hip")
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display: Roof shape is hip");
+end

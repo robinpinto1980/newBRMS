@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check the heating type"
+when
+Heating(heatingType=="OilTank")
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display: The heating type is oil tank");
+end
+
+rule "Check if not oiltank  heating type"
+when
+Heating(heatingType!="OilTank")
+then
+value.clear();
+key.clear();
+key.add("Display: The heating type is not oil tank");
+end

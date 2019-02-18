@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "check whether there is a current policy coverage"
+when
+CurrentCoverage(currentCoverage=="yes")
+then 
+   value.clear();
+    key.clear();
+    value.add("val:1");
+   key.add("Display:Have a current policy coverage");
+end
+
+rule "check if thers is no current policy coverage"
+    when
+       CurrentCoverage(currentCoverage!="yes")
+    then
+        value.clear();
+        key.clear();
+       key.add("Display:Donot Have a current policy coverage");
+end

@@ -1,0 +1,22 @@
+package org.brms.myproject
+global java.util.List value;
+global java.util.List key;
+
+rule "Check if he has a garage"
+    when
+        additionalStructGarage(garage=="yes")
+    then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+        key.add("Display: Have a garage");
+end
+
+rule "Check if no garage"
+    when
+        additionalStructGarage(garage!="yes")
+    then
+        value.clear();
+        key.clear();
+        key.add("Display: No garage");
+end

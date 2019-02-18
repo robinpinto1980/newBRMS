@@ -1,0 +1,33 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check whether the type of Construction is masonary"
+    when
+        WallConstruction(wallConstruction=="Masonry")
+    then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+        key.add("Display: Wall construction is masonry");
+end
+
+rule "Check whether the type of Construction is Frame"
+    when
+        WallConstruction(wallConstruction=="Frame")
+    then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+        key.add("Display: Wall construction is Frame");
+end
+
+rule "Check the type of Construction of Mixed-masonary"
+    when
+        WallConstruction(wallConstruction=="Mixed Masonry-Frame")
+    then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+        key.add("Display: Wall construction is Mixed-masonry");
+end

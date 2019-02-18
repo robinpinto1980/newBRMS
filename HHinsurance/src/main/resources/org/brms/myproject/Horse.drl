@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "check wether you have horse"
+when
+otherDetailsHorse(horse=="yes")
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display: have horses at house");
+end
+
+rule "check if no horse"
+when
+otherDetailsHorse(horse!="yes")
+then
+value.clear();
+key.clear();
+key.add("Display: no horses at house");
+end

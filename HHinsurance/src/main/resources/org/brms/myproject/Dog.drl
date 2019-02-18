@@ -1,0 +1,23 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "check wether you have dog"
+when
+otherDetailsDog(dog=="yes")
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display: any dog bites, Dominant dog breed");
+end
+
+rule "check if no dog"
+when
+otherDetailsDog(dog!="yes")
+then
+value.clear();
+key.clear();
+key.add("Display:no dog bites,no Dominant dog breed");
+end
+

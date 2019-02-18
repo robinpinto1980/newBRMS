@@ -1,0 +1,95 @@
+package org.brms.myproject;
+global java.util.List quality;
+global java.util.List roof;
+global java.util.List pool;
+global java.util.List enclosure;
+
+rule "Quality grade for kitchen"
+    when 
+        q:Policy(kitchenQual > bathroomQual)
+    then
+        quality.clear();
+        quality.add(q.getKitchenQual());
+end
+
+rule "Quality grade for bathroom"
+    when 
+        q:Policy(kitchenQual < bathroomQual)
+    then
+        quality.clear();
+        quality.add(q.getBathroomQual());
+end
+
+rule "Quality grade for bathroom1"
+    when 
+        q:Policy(kitchenQual == bathroomQual)
+    then
+        quality.clear();
+        quality.add(q.getBathroomQual());
+end
+
+
+rule "Quality grade not available"
+    when 
+        q:Policy((kitchenQual == 0)||(bathroomQual == 0))
+    then
+        quality.clear();
+        quality.add(0);
+end
+
+
+
+rule "Pool with screen enclosure"
+    when 
+        Policy((pool == true)&&(screenedEnclosure == "yes"))
+    then 
+        enclosure.clear();
+        pool.clear();
+        enclosure.add(10000);
+        pool.add(20000);
+end
+
+rule "Pool without screen enclosure"
+    when  
+        Policy((pool == true)&&(screenedEnclosure != "yes"))
+    then 
+        pool.clear();
+        enclosure.clear();
+        pool.add(20000);
+        enclosure.add(0);
+end
+
+rule "No pool at the house"
+    when
+        Policy(pool != true)
+    then
+        enclosure.clear();
+        pool.clear();
+        enclosure.add(0);
+        pool.add(0);
+end
+
+rule "Architectural Shingle roof material"
+    when
+        Policy(roofMaterial == "Architectural Shingles")
+    then
+        roof.clear();
+        roof.add(5000);
+end
+
+rule "Tile or metal roof material"
+    when
+        Policy((roofMaterial == "Tiles")||(roofMaterial == "Metal"))
+    then 
+        roof.clear();
+        roof.add(20000);   
+ end
+ 
+rule "Roof material not in list"
+    when
+        Policy(roofMaterial == null)
+    then
+        roof.clear();
+        roof.add(0);
+end
+

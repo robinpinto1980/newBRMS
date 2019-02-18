@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "To check whether interior fully replumbed"
+when
+InteriorReplumb(interiorReplumb=="yes")
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display: The interior was fully replumbed");;
+end
+
+rule "To check whether interior not fully replumbed"
+when
+InteriorReplumb(interiorReplumb!="yes")
+then
+value.clear();
+key.clear();
+key.add("Display:The interior was not fully replumbed");;
+end

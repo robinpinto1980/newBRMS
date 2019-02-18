@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "are you actively repairing"
+when
+ActivelyRepairing(activelyRepairing=="yes")
+then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+        key.add("Display: The damage is being actively repaired");
+end
+
+rule "check if not actively repairing"
+when
+ActivelyRepairing(activelyRepairing!="yes")
+then
+        value.clear();
+        key.clear();
+        key.add("Display: The damage is not being actively repaired");
+end

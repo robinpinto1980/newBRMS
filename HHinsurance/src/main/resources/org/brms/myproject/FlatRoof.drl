@@ -1,0 +1,7 @@
+package org.brms.myproject;
+rule "To check for flat roof"
+when
+FlatRoof(flatRoof=="yes")
+then
+System.out.println("The roof is flat so ask for flat roof");
+end

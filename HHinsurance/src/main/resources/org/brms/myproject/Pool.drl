@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check if he has a pool"
+    when
+        additionalStructPool(pool=="yes")
+    then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+        key.add("Display: Has a pool at the house");
+end
+
+rule "Check if no pool"
+    when
+        additionalStructPool(pool!="yes")
+    then
+        value.clear();
+        key.clear();
+        key.add("Display: No pool at the house");
+end

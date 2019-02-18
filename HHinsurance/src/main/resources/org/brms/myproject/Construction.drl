@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check wether the structure is Mixed-masonary"
+when
+Construction(constructionType=="Mixed Masonry-Frame")
+then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+key.add("Display: The construction type is Mixed masonry frame and display the ratio");
+end
+
+rule "if not Mixed-masonary"
+when
+Construction(constructionType!="Mixed Masonry-Frame")
+then
+        value.clear();
+        key.clear();
+key.add("Display: The construction type is not Mixed masonry frame and don't display the ratio");
+end

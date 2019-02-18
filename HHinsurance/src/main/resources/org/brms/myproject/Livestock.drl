@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "check wether you have livestock"
+when
+otherDetailsLivestock(livestock=="yes")
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display: have livestock at house");
+end
+
+rule "check if no livestock"
+when
+otherDetailsLivestock(livestock!="yes")
+then
+value.clear();
+key.clear();
+key.add("Display: have no livestock at house");
+end 

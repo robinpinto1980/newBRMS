@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Do you have any unrepaired damage?"
+when
+UnrepairedDamage(unrepairedDamage=="yes")
+then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+        key.add("Display: Have damages that need to be repaired");
+end
+
+rule "Do no unrepaired damage"
+when
+UnrepairedDamage(unrepairedDamage!="yes")
+then
+        value.clear();
+        key.clear();
+        key.add("Display: No damages that need to be repaired");
+end

@@ -1,0 +1,44 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check whether Constructed before 2001"
+when
+YearOfConstruction(yearOfConstruction<2002)
+then
+value.clear();
+key.clear();
+value.add(1);
+key.add("Constructed on or before 2001");
+end
+
+rule "Check whether year of construction is less than 30 years"
+when
+YearOfConstruction(yearOfConstruction<(year-29))
+then
+value.clear();
+key.clear();
+value.add(2);
+key.add("Constructed before 30 years");
+end
+
+rule "Check whether constructed before 2001"
+when
+YearOfConstruction(yearOfConstruction==year)
+then
+value.clear();
+key.clear();
+value.add(3);
+key.add("Constructed in the current year");
+end
+
+rule "Check if not between 2001 and current year"
+when
+YearOfConstruction((yearOfConstruction>2001)&&(yearOfConstruction<year))
+then
+value.clear();
+key.clear();
+value.add(0);
+key.add("Don't display any options");
+end
+

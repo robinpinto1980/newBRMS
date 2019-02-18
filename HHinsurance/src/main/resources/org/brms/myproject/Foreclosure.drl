@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Had any foreclosure"
+when
+Foreclosure(hadForeclosure=="yes")
+then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+        key.add("Display: Had a foreclosure in the past five years");
+end
+
+rule "if no foreclosure"
+when
+Foreclosure(hadForeclosure!="yes")
+then
+        value.clear();
+        key.clear();
+        key.add("Display: Had no foreclosure in the past five years");
+end

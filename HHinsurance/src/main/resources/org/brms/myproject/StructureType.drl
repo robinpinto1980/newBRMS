@@ -1,0 +1,33 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "check whether it is a row house or condominium"
+when
+StructureType((houseType=="Row House")||(houseType=="Condominium"))
+then
+value.clear();
+key.clear();
+value.add(1);
+key.add("Display: How many stories?");
+end
+
+rule "check if not condominium or row"
+    when
+        StructureType((houseType!="Condominium")&&(houseType!="Row House"))
+    then
+        value.clear();
+        key.clear();
+        value.add(0);
+        key.add("Don't display the stories");
+end
+
+rule "Check number of stories six or above"
+    when
+        StructureType((stories>5)&&(houseType=="Condominium"))
+    then
+        value.clear();
+        key.clear();
+        value.add(2);
+        key.add("Have more than 5 stories so the Construction is superior");
+end

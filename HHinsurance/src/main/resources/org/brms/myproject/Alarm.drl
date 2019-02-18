@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check whether you have an alarm"
+    when
+        Alarm(alarm=="yes")
+    then
+    value.clear();
+    key.clear();
+    value.add("val:1");
+    key.add("Display:The building has an alarm installed");
+end
+
+rule "Check if you have no alarm"
+    when
+        Alarm(alarm!="yes")
+    then
+    value.clear();
+    key.clear();
+    key.add("Display:The building has no alarm installed");
+end

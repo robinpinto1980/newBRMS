@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check the number of prior claims if any"
+when
+PriorClaims((numberOfClaims>0)&&(numberOfClaims<5))
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display:The required options");
+end
+
+rule "Check the number of prior claims if any of this"
+when
+PriorClaims(numberOfClaims==0)
+then
+value.clear();
+key.clear();
+key.add("Display: Don't display options");
+end

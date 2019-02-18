@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "To check whether you have business at home"
+when
+HomeBusiness(bussinessInHome=="yes")
+then
+value.clear();
+key.clear();
+value.add("val:1");
+key.add("Display: Has business at home and check whether customers come to house");
+end
+
+rule "To check if no business at home"
+when
+HomeBusiness(bussinessInHome!="yes")
+then
+value.clear();
+key.clear();
+key.add("Display: No business at home");
+end

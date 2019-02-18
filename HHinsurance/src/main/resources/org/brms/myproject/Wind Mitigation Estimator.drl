@@ -1,0 +1,442 @@
+package org.brms.myproject;
+global java.util.List roofCovering;
+global java.util.List roofDeck;
+global java.util.List swr;
+global java.util.List openingProtect;
+global java.util.List roofWallConnection;
+global java.util.List roofCovering;
+
+rule "Roof covering rule"
+     when 
+         WindMitigationEstimator(((yearBuilt > -1) && (yearBuilt < 2002) && (roofYear > 2002)) || (yearBuilt > 2002))
+     then
+         roofCovering.clear();
+         roofCovering.add("Meets FBC 2001");
+end
+
+rule "Roof covering not eligible"
+     when 
+         WindMitigationEstimator(((yearBuilt > -1) && (yearBuilt < 2002)) && ((roofYear > -1) && (roofYear < 2002)))
+     then
+         roofCovering.clear();
+         roofCovering.add("Non FBC");
+end
+
+rule "County - Miami- dade"
+    when 
+        WindMitigationEstimator(((county == "Miami-Dade") || (county == "Broward")) && ((yearBuilt > -1) && (yearBuilt <  2019)))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end 
+
+rule "county Collier Palm Beach 1" 
+    when
+        WindMitigationEstimator((((yearBuilt > -1) && (yearBuilt < 1973)) || ((yearBuilt > 1991) && (yearBuilt < 2019))) && ((county == "Collier")||(county == "Lee")||(county == "Palm Beach"))) 
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "county Collier Palm Beach2" 
+    when
+        WindMitigationEstimator(((yearBuilt > 1972) && (yearBuilt < 1992) && (roofYear > 1972) && (roofYear < 2002)) && ((county == "Collier")||(county == "Lee")||(county == "Palm Beach"))) 
+    then
+        roofDeck.clear();
+        roofDeck.add("Level A");
+end
+
+rule "county Collier Palm Beach3" 
+    when
+        WindMitigationEstimator (( yearBuilt > 1972) && (yearBuilt < 1992) && (roofYear > 2001) && (roofYear < 2019) && ((county == "Collier")||(county == "Lee")||(county == "Palm Beach"))) 
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "County Hillsborough/Pasco/St. Lucie/Martin1"
+    when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 1973) && ((county == "Hillsborough")||(county == "Pasco")||(county == "St. Lucie")||(county == "Martin")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "County Hillsborough/Pasco/St. Lucie/Martin2"
+    when 
+        WindMitigationEstimator((yearBuilt > 1972) && (yearBuilt < 1988) && (roofYear > -1) && (roofYear < 2008) && ((county == "Hillsborough")||(county == "Pasco")||(county == "St. Lucie")||(county == "Martin")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level A");
+end
+
+rule "County Hillsborough/Pasco/St. Lucie/Martin3"
+    when 
+        WindMitigationEstimator((yearBuilt > 1972) && (yearBuilt < 1988) && (roofYear > 2007) && (roofYear < 2019) && ((county == "Hillsborough")||(county == "Pasco")||(county == "St. Lucie")||(county == "Martin")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "County Hillsborough/Pasco/St. Lucie/Martin4"
+    when 
+        WindMitigationEstimator((yearBuilt > 1987) && (yearBuilt < 2002) && (roofYear > 1987) && (roofYear < 2008) && ((county == "Hillsborough")||(county == "Pasco")||(county == "St. Lucie")||(county == "Martin")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level A");
+end
+
+rule "County Hillsborough/Pasco/St. Lucie/Martin5"
+    when 
+        WindMitigationEstimator((yearBuilt > 1987) && (yearBuilt < 2002) && (roofYear > 2007) && (roofYear < 2019) && ((county == "Hillsborough")||(county == "Pasco")||(county == "St. Lucie")||(county == "Martin")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "County Hillsborough/Pasco/St. Lucie/Martin6"
+    when 
+        WindMitigationEstimator((yearBuilt > 2001) && (yearBuilt < 2019) && ((county == "Hillsborough")||(county == "Pasco")||(county == "St. Lucie")||(county == "Martin")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level B");
+end
+
+
+rule "County Orange/Duval/St. Johns/Hernando/Volusia/Brevard/Pinellas/Manatee/Sarasota/Charlotte1"
+    when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 1973) && ((county == "Orange")||(county == "Duval")||(county == "St. Johns")||(county == "Hernando")||(county == "Volusia")||(county == "Brevard")||(county == "Pinellas")||(county == "Manatee")||(county == "Sarasota")||(county == "Charlotte")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "County Orange/Duval/St. Johns/Hernando/Volusia/Brevard2"
+    when 
+        WindMitigationEstimator((yearBuilt >1972) && (yearBuilt < 1994) && (roofYear > 1972) && (roofYear < 2008) && ((county == "Orange")||(county == "Duval")||(county == "St. Johns")||(county == "Hernando")||(county == "Volusia")||(county == "Brevard")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level A");
+end
+
+rule "County Orange/Duval/St. Johns/Hernando/Volusia/Brevard3"
+    when 
+        WindMitigationEstimator((yearBuilt > 1972) && (yearBuilt < 1994) && (roofYear > 2007) && (roofYear < 2019) && ((county == "Orange")||(county == "Duval")||(county == "St. Johns")||(county == "Hernando")||(county == "Volusia")||(county == "Brevard")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "County Orange/Duval/St. Johns/Hernando/Volusia/Brevard4"
+    when 
+        WindMitigationEstimator((yearBuilt > 1993) && (yearBuilt < 2002) && ((county == "Orange")||(county == "Duval")||(county == "St. Johns")||(county == "Hernando")||(county == "Volusia")||(county == "Brevard")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level A");
+end
+
+rule "County Orange/Duval/St. Johns/Hernando/Volusia/Brevard5"
+    when 
+        WindMitigationEstimator((yearBuilt > 2001) && (yearBuilt < 2019) && ((county == "Orange")||(county == "Duval")||(county == "St. Johns")||(county == "Hernando")||(county == "Volusia")||(county == "Brevard")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level A");
+end
+
+rule "Pinellas/Manatee/Sarasota/Charlotte4"
+ when 
+        WindMitigationEstimator((yearBuilt > 1972) && (yearBuilt < 2002) && (roofYear > 1972) && (roofYear < 2002) && ((county == "Pinellas")||(county == "Manatee")||(county == "Sarasota")||(county == "Charlotte")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level B");
+end		
+rule "Pinellas/Manatee/Sarasota/Charlotte5"
+ when 
+        WindMitigationEstimator((yearBuilt > 1972) && (yearBuilt < 2002) && (roofYear > 2001) && (roofYear < 2019) && ((county == "Pinellas")||(county == "Manatee")||(county == "Sarasota")||(county == "Charlotte")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "Pinellas/Manatee/Sarasota/Charlotte6"
+ when 
+        WindMitigationEstimator((yearBuilt > 2001) && (yearBuilt < 2019) && ((county == "Pinellas")||(county == "Manatee")||(county == "Sarasota")||(county == "Charlotte")))
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "All Other Counties12"
+ when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 1973) && ((county!= "Miami-Dade") && (county != "Broward") && (county != "Collier") && (county != "Lee") && (county != "Palm Beach") && (county != "Hillsborough") && (county != "Pasco") && (county != "St. Lucie") && (county != "Martin") && (county != "Orange") && (county != "Duval") && (county != "St. Johns" ) && (county!= "Hernando") && (county != "Volusia") && (county != "Brevard") && (county != "Pinellas") && (county != "Manatee") && (county != "Sarasota") && (county != "Charlotte"))) 
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "All Other Counties22"
+ when 
+        WindMitigationEstimator((yearBuilt > 1972) && (yearBuilt < 1997) && (roofYear > -1) && (roofYear < 2008) && ((county!= "Miami-Dade") && (county != "Broward") && (county != "Collier") && (county != "Lee") && (county != "Palm Beach") && (county != "Hillsborough") && (county != "Pasco") && (county != "St. Lucie") && (county != "Martin") && (county != "Orange") && (county != "Duval") && (county != "St. Johns" ) && (county!= "Hernando") && (county != "Volusia") && (county != "Brevard") && (county != "Pinellas") && (county != "Manatee") && (county != "Sarasota") && (county != "Charlotte"))) 
+    then
+        roofDeck.clear();
+        roofDeck.add("Level A");
+end
+
+rule "All Other Counties32"
+ when 
+        WindMitigationEstimator((yearBuilt > 1972) && (yearBuilt < 1997) && (roofYear > 2007) && (roofYear < 2019) && ((county!= "Miami-Dade") && (county != "Broward") && (county != "Collier") && (county != "Lee") && (county != "Palm Beach") && (county != "Hillsborough") && (county != "Pasco") && (county != "St. Lucie") && (county != "Martin") && (county != "Orange") && (county != "Duval") && (county != "St. Johns" ) && (county!= "Hernando") && (county != "Volusia") && (county != "Brevard") && (county != "Pinellas") && (county != "Manatee") && (county != "Sarasota") && (county != "Charlotte"))) 
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "All Other Counties42"
+ when 
+        WindMitigationEstimator((yearBuilt > 1996) && (yearBuilt < 2002) && (roofYear > 1996) && (roofYear < 2008) && ((county!= "Miami-Dade") && (county != "Broward") && (county != "Collier") && (county != "Lee") && (county != "Palm Beach") && (county != "Hillsborough") && (county != "Pasco") && (county != "St. Lucie") && (county != "Martin") && (county != "Orange") && (county != "Duval") && (county != "St. Johns" ) && (county!= "Hernando") && (county != "Volusia") && (county != "Brevard") && (county != "Pinellas") && (county != "Manatee") && (county != "Sarasota") && (county != "Charlotte"))) 
+    then
+        roofDeck.clear();
+        roofDeck.add("Level A");
+end
+
+rule "All Other Counties5"
+ when 
+        WindMitigationEstimator((yearBuilt > 1996) && (yearBuilt < 2002) && (roofYear > 2007) && (roofYear < 2019) && ((county!= "Miami-Dade") && (county != "Broward") && (county != "Collier") && (county != "Lee") && (county != "Palm Beach") && (county != "Hillsborough") && (county != "Pasco") && (county != "St. Lucie") && (county != "Martin") && (county != "Orange") && (county != "Duval") && (county != "St. Johns" ) && (county!= "Hernando") && (county != "Volusia") && (county != "Brevard") && (county != "Pinellas") && (county != "Manatee") && (county != "Sarasota") && (county != "Charlotte"))) 
+    then
+        roofDeck.clear();
+        roofDeck.add("Level C");
+end
+
+rule "All Other Counties6"
+ when 
+        WindMitigationEstimator((yearBuilt > 2001) && (yearBuilt < 2018) && ((county!= "Miami-Dade") && (county != "Broward") && (county != "Collier") && (county != "Lee") && (county != "Palm Beach") && (county != "Hillsborough") && (county != "Pasco") && (county != "St. Lucie") && (county != "Martin") && (county != "Orange") && (county != "Duval") && (county != "St. Johns" ) && (county!= "Hernando") && (county != "Volusia") && (county != "Brevard") && (county != "Pinellas") && (county != "Manatee") && (county != "Sarasota") && (county != "Charlotte"))) 
+    then
+        roofDeck.clear();
+        roofDeck.add("Level A");
+end
+
+rule "Miami-Dade/Broward roof wall connection 1"
+    when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 1973) && ( roofYear > -1) && (roofYear < 2007)&& ((county == "Miami-Dade")||(county == "Broward")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Toe Nails");
+end
+
+ rule "Miami-Dade/Broward roof wall connection 2"
+    when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 1973) && (roofYear > 2006) && (roofYear < 2019) && ((county == "Miami-Dade")||(county == "Broward")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Clips");
+end
+
+ rule "Miami-Dade/Broward roof wall connection 3"
+    when 
+        WindMitigationEstimator((yearBuilt > 1972) && (yearBuilt < 1996) && ((county == "Miami-Dade")||(county == "Broward")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Clips");
+end
+
+ rule "Miami-Dade roof wall connection 3"
+    when 
+        WindMitigationEstimator((yearBuilt > 1995) && (yearBuilt < 2019) && (county == "Miami-Dade"))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Single Wraps");
+end
+
+
+ rule "Broward roof wall connection 3"
+    when 
+        WindMitigationEstimator((yearBuilt > 1995) && (yearBuilt < 2018) && (county == "Broward"))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Single Wraps");
+end
+
+rule "Collier/Lee/Palm Beach1"
+ when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 1973) && (roofYear > -1) && (roofYear < 2004) && ((county == "Collier")||(county == "Lee")||(county == "Palm Beach")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Toe Nails");
+end
+
+
+rule "Collier/Lee/Palm Beach2"
+ when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt <1973) && ( roofYear >2003) && (roofYear < 2019)&&((county == "Collier")||(county == "Lee")||(county == "Palm Beach")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Clips");
+end
+
+rule "Collier/Lee/Palm Beach3"
+ when 
+        WindMitigationEstimator((yearBuilt > 1972) && (yearBuilt < 2019) &&((county == "Collier")||(county == "Lee")||(county == "Palm Beach")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Clips");
+end
+
+rule "Hillsborough/Pasco/St. Lucie/Martin/Orange/Duval/St. Johns/Hernando/Volusia/Brevard"
+ when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 1973) && ((county == "Hillsborough")||(county == "Pasco")||(county == "St. Lucie")||(county == "Martin")||(county == "Orange")||(county == "Duval")||(county == "St. Johns")||(county == "Hernando")||(county == "Volusia")||(county == "Brevard")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Toe Nails");
+end
+
+rule "Hillsborough/Pasco/St. Lucie/Martin2"
+ when 
+        WindMitigationEstimator((yearBuilt > 1972) && (yearBuilt < 1988) && (roofYear > -1) && (roofYear < 2020)&&((county == "Hillsborough")||(county == "Pasco")||(county == "St. Lucie")||(county == "Martin")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Toe Nails");
+end
+
+rule "Hillsborough/Pasco/St. Lucie/Martin3"
+ when 
+        WindMitigationEstimator((yearBuilt > 1997) && (yearBuilt < 2019)&& (roofYear > 1997) && (roofYear < 2019) && ((county == "Hillsborough")||(county == "Pasco")||(county == "St. Lucie")||(county == "Martin")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Clips");
+end
+
+rule "Orange/Duval/St. Johns/Hernando/Volusia/Brevard2"
+ when 
+        WindMitigationEstimator((yearBuilt > 1972) && (yearBuilt < 1994)&& (roofYear > 1972) && (roofYear < 2019) && ((county == "Orange")||(county == "Duval")||(county == "St. Johns")||(county == "Hernando")||(county == "Volusia")||(county == "Brevard")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Toe Nails");
+end
+
+rule "Orange/Duval/St. Johns/Hernando/Volusia/Brevard3"
+ when 
+        WindMitigationEstimator((yearBuilt > 1993) && (yearBuilt < 2019) && ((county == "Orange")||(county == "Duval")||(county == "St. Johns")||(county == "Hernando")||(county == "Volusia")||(county == "Brevard")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Clips");
+end
+
+rule "Pinellas/Manatee/Sarasota/Charlotte1"
+when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 1977) && ((county == "Pinellas")||(county == "Manatee")||(county == "Sarasota")||(county == "Charlotte")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Toe Nails");
+end
+
+rule "Pinellas/Manatee/Sarasota/Charlotte2"
+when 
+        WindMitigationEstimator((yearBuilt > 1975) && (yearBuilt < 2019) && ((county == "Pinellas")||(county == "Manatee")||(county == "Sarasota")||(county == "Charlotte")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Clips");
+end
+
+rule "All Other Counties1"
+when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt <1997) && ((county!= "Miami-Dade") && (county != "Broward") && (county != "Collier") && (county != "Lee") && (county != "Palm Beach") && (county != "Hillsborough") && (county != "Pasco") && (county != "St. Lucie") && (county != "Martin") && (county != "Orange") && (county != "Duval") && (county != "St. Johns" ) && (county!= "Hernando") && (county != "Volusia") && (county != "Brevard") && (county != "Pinellas") && (county != "Manatee") && (county != "Sarasota") && (county != "Charlotte")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Toe Nails");
+end
+
+rule "All Other Counties2"	
+when 
+        WindMitigationEstimator((yearBuilt > 1996) && (yearBuilt < 2019) && ((county!= "Miami-Dade") && (county != "Broward") && (county != "Collier") && (county != "Lee") && (county != "Palm Beach") && (county != "Hillsborough") && (county != "Pasco") && (county != "St. Lucie") && (county != "Martin") && (county != "Orange") && (county != "Duval") && (county != "St. Johns" ) && (county!= "Hernando") && (county != "Volusia") && (county != "Brevard") && (county != "Pinellas") && (county != "Manatee") && (county != "Sarasota") && (county != "Charlotte")))
+    then
+        roofWallConnection.clear();
+        roofWallConnection.add("Clips");
+end
+
+rule "All Other Counties sec1"
+when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 2013) && (roofYear >2012))
+    then
+        swr.clear();
+        swr.add("Yes");
+end
+		
+rule "All Other Counties sec2"
+when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 2013) && (roofYear > -1) && (roofYear <2012))
+    then
+        swr.clear();
+        swr.add("No");
+end
+		
+rule "All Other Counties sec3"
+when 
+        WindMitigationEstimator(yearBuilt > 2013)
+    then
+        swr.clear();
+        swr.add("Yes");
+end
+
+rule "Miami-Dade Openprot1"
+when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 1996) && ((county == "Miami-Dade")||(county == "Broward")))
+    then
+        openingProtect.clear();
+        openingProtect.add("Unknown or None");
+end
+
+rule "Miami-Dade/Broward Openprot2"
+when 
+        WindMitigationEstimator((yearBuilt > 1995) && (yearBuilt < 2019) && ((county == "Miami-Dade")||(county == "Broward")))
+    then
+        openingProtect.clear();
+        openingProtect.add("Hurricane Protection");
+end
+		
+rule "Collier/Lee/Palm Beach Openprot1"
+when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 2002) && ((county == "Collier")||(county == "Lee")||(county == "Palm Beach")))
+    then
+        openingProtect.clear();
+        openingProtect.add("Unknown or None");
+end
+		
+rule "Collier/Lee/Palm Beach Openprot2"
+when 
+        WindMitigationEstimator((yearBuilt > 2001) && (yearBuilt < 2019) && ((county == "Collier")||(county == "Lee")||(county == "Palm Beach")))
+    then
+        openingProtect.clear();
+        openingProtect.add("Hurricane Protection");
+end
+		
+rule "Hillsborough/Pasco/St. Lucie/Martin/Orange/Duval/St. Johns/Hernando/Volusia/Brevard Openprot1"
+when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 2019) && ((county == "Hillsborough")||(county == "Pasco")||(county == "St. Lucie")||(county == "Martin")||(county == "Orange")||(county == "Duval")||(county == "St. Johns")||(county == "Hernando")||(county == "Volusia")||(county == "Brevard")))
+    then
+        openingProtect.clear();
+        openingProtect.add("Unknown or None");
+end
+		
+rule "Pinellas/Manatee/Sarasota/Charlotte openprot1"
+when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 2012) && ((county == "Pinellas")||(county == "Manatee")||(county == "Sarasota")||(county == "Charlotte")))
+    then
+        openingProtect.clear();
+        openingProtect.add("Unknown or None");
+end
+		
+rule "Pinellas/Manatee/Sarasota/Charlotte openprot2"
+when 
+        WindMitigationEstimator((yearBuilt > 2011) && (yearBuilt < 2019) && ((county == "Pinellas")||(county == "Manatee")||(county == "Sarasota")||(county == "Charlotte")))
+    then
+        openingProtect.clear();
+        openingProtect.add("Hurricane Protection");
+end
+		
+rule "Any other countries openprot2"
+when 
+        WindMitigationEstimator((yearBuilt > -1) && (yearBuilt < 2019) && ((county!= "Miami-Dade") && (county != "Broward") && (county != "Collier") && (county != "Lee") && (county != "Palm Beach") && (county != "Hillsborough") && (county != "Pasco") && (county != "St. Lucie") && (county != "Martin") && (county != "Orange") && (county != "Duval") && (county != "St. Johns" ) && (county!= "Hernando") && (county != "Volusia") && (county != "Brevard") && (county != "Pinellas") && (county != "Manatee") && (county != "Sarasota") && (county != "Charlotte"))) 
+    then
+        openingProtect.clear();
+        openingProtect.add("Unknown or None");
+end
+

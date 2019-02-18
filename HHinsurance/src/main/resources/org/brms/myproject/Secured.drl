@@ -1,0 +1,22 @@
+package org.brms.myproject;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check whether you have a secured community"
+    when
+        Safety(securedCommunity=="yes")
+    then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+        key.add("Display:Have a secured community");
+end
+
+rule "Check if not a secured community"
+    when
+        Safety(securedCommunity!="yes")
+    then
+        value.clear();
+        key.clear();
+        key.add("Display:no secured community");
+end
